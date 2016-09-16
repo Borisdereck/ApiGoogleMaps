@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<!--Css Index-->
+	<link rel="stylesheet" href="css/style.css" charset="utf-8">
+	<!--APi de Google Maps-->
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvPKXwP7DQdEhOyLcZZE9HW7-1yC_8lFE">
+	</script>
+	<!--Jquery-->
+	<script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+	<!--Bootstrap Css-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<!--Bootstrap Js-->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<!--Javascript Index-->
+	<script type="text/javascript" src="Js/index.js"></script>
+</head>
+
+<body>
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<div class="col-md-4" id="infor">
+				<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+					<div class="panel panel-default">
+						<div class="panel-heading" role="tab" id="headingOne">
+							<h4 class="panel-title">
+		<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+			Agregar
+		</a>
+	</h4>
+						</div>
+						<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+							<div class="panel-body">
+								<form id="formulario">
+									<table class="table">
+									  <thead>
+									    <tr>
+									      <th>Agregar Sucursal</th>
+									    </tr>
+									  </thead>
+									  <tbody>
+									    <tr>
+									      <td>Nombre Empresa</td>
+												<td><input type="text"  class="form-control" name="titulo" value=""></td>
+									    </tr>
+											<tr>
+									      <td>Coordenada X</td>
+												<td><input type="text"  class="form-control" readonly  name="cx" value=""></td>
+									    </tr>
+											<tr>
+									      <td>Coordenada Y</td>
+												<td><input type="text" class="form-control" readonly  name="cy" value=""></td>
+									    </tr>
+									  </tbody>
+									</table>
+
+										<input type="submit" id="btn-grabar" class="btn btn-success btn-sm" value="Guardar">
+										<input type="submit" class="btn btn-danger btn-sm" value="Cancelar">
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="panel panel-default">
+						<div class="panel-heading" role="tab" id="headingTwo">
+							<h4 class="panel-title">
+		<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+			Buscar
+		</a>
+	</h4>
+						</div>
+						<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+							<div class="panel-body">
+								Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird
+								on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table,
+								raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<!--Mapa-->
+			<div class="col-md-8" id="mapa">
+
+			</div>
+		</div>
+	</div>
+
+
+
+</body>
+
+</html>
