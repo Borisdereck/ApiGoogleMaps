@@ -1,25 +1,25 @@
-
 var marcadores_nuevos = [];
 var marcadores_db = [];
+var mapa= null;
 
 function quitar_marcadores(lista) {
-		for (var i = 0; i < lista.length; i++) {
-			lista[i].setMap(null);
-		}
+    for (var i = 0; i < lista.length; i++) {
+        lista[i].setMap(null);
+    }
 
 }
 
 $(document).on("ready", function() {
 
-		var formulario = $("#formulario");
+    var formulario = $("#formulario");
     var punto = new google.maps.LatLng(10.9685400, -74.7813200);
     var config = {
-        zoom: 12,
+        zoom: 11,
         center: punto,
         mapTypeId: google.maps.MapTypeId.STREETMAP
     };
 
-    var mapa = new google.maps.Map($("#mapa")[0], config);
+     mapa = new google.maps.Map($("#mapa")[0], config);
     //Evento Click que nos devuelve la posicion
     google.maps.event.addListener(mapa, "click", function(event) {
         //alert(event.latLng);
@@ -45,11 +45,11 @@ $(document).on("ready", function() {
             draggable: false //no permitir arrastrar el marcador
         });
 
-				//pasar las coordenadas al formulario
-				formulario.find("input[name='cx']").val(lista[0]);
-				formulario.find("input[name='cy']").val(lista[1]);
+        //pasar las coordenadas al formulario
+        formulario.find("input[name='cx']").val(lista[0]);
+        formulario.find("input[name='cy']").val(lista[1]);
 
-				formulario.find("input[name='titulo']").focus();
+        formulario.find("input[name='titulo']").focus();
 
         //guardar el marcador en el array
         marcadores_nuevos.push(marcador);
@@ -67,23 +67,65 @@ $(document).on("ready", function() {
 
 
     });
-			$("#btn-grabar").on("click", function(){
-				var f = $("#formulario");
-					$.ajax({
-						type		:"post",
-						url			:"Script/iajax.php",
-						dataType:"JSON",
-						data		:f.serialize()+"&tipo=grabar",
-						success	:function(data){
-								alert(data.mensaje)
-						},
-						beforeSend:function(){
+    $("#btn-grabar").on("click", function() {
+        var f = $("#formulario");
+        $.ajax({
+            type: "post",
+            url: "Script/iajax.php",
+            dataType: "JSON",
+            data: f.serialize() + "&tipo=grabar",
+            success: function(data) {
+                alert(data.mensaje);
+								listar();
+            },
+            beforeSend: function() {
 
-						},
-						complete:function(){
+            },
+            complete: function() {
 
-						}
-					})
-				return false;
-			});
+            }
+        })
+        return false;
+    });
+    //cargar puntos al terminar de cargar la pagination
+    listar();
 });
+//fuera del document on ready
+
+function listar() {
+		quitar_marcadores(marcadores_db);
+
+    $.ajax({
+        type: "post",
+        url: "Script/iajax.php",
+        dataType: "JSON",
+        data: "&tipo=listar",
+        success: function(data) {
+            if (data.estado == "ok") {
+                $.each(data.mensaje, function(i, item) {
+                    var posi = new google.maps.LatLng(item.cx, item.cy);
+                    var marca = new google.maps.Marker({
+                        idMarcador: item.IdPunto,
+                        position: posi,
+                        titulo: item.Titulo
+                    });
+                    //agregar evento click al marcador
+                    google.maps.event.addListener(marca, "click", function() {
+                        alert("hiciste click en: "+marca.idMarcador + " - " +marca.titulo);
+                    });
+                    marcadores_db.push(marca);
+                    marca.setMap(mapa);
+
+                });
+            } else {
+                alert("Hay puntos en la db");
+            }
+        },
+        beforeSend: function() {
+
+        },
+        complete: function() {
+
+        }
+    })
+}
