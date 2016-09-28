@@ -45,6 +45,10 @@ $(document).on("ready", function() {
             draggable: false //no permitir arrastrar el marcador
         });
 
+				//mostramos y escondemos los paneles
+				$("#collapseOne").collapse("show");
+				$("#collapseTwo").collapse("hide");
+
         //pasar las coordenadas al formulario
         formulario.find("input[name='cx']").val(lista[0]);
         formulario.find("input[name='cy']").val(lista[1]);
@@ -69,31 +73,91 @@ $(document).on("ready", function() {
     });
     $("#btn-grabar").on("click", function() {
         var f = $("#formulario");
+				if (f.find("input[name='titulo']").val().trim()=="") {
+					alert("falta TItulo");
+					return false;
+				}
+				if (f.find("input[name='cx']").val().trim()=="") {
+					alert("falta COordenada X");
+					return false;
+				}
+				if (f.find("input[name='cy']").val().trim()=="") {
+					alert("falta COordenada Y");
+					return false;
+				}
+				if (f.hasClass("busy")) {
+
+
+					return false;
+				}
+				f.addClass("busy");
+				var loader_grabar = $("#loader_grabar");
         $.ajax({
             type: "post",
             url: "Script/iajax.php",
             dataType: "JSON",
             data: f.serialize() + "&tipo=grabar",
             success: function(data) {
-                alert(data.mensaje);
-								listar();
+                //alert(data.mensaje);
+								if (data.estado == "ok" ) {
+									loader_grabar.removeClass("label-warning").addClass("label-success").text("Datos Grabados!").delay(3000).slideUp();
+										listar();
+								} else {
+									alert(data.mensaje);
+								}
+
             },
             beforeSend: function() {
-
+								loader_grabar.removeClass("label-success").addClass("label label-warning").text("Procesando...").slideDown();
             },
             complete: function() {
+							f.removeClass("busy");
 
+								$("form")[0].reset();
             }
-        })
+        });
         return false;
     });
+
+		$("#botonborrar").on("click", function(){
+			if (confirm("esta Seguro?")== false) {
+				return;
+			}
+			var f = $("#formulario_edicion");
+				$.ajax({
+						type: "POST",
+						url: "Script/iajax.php",
+						data: f.serialize() + "&tipo=borrar",
+						dataType: "JSON",
+						success:function(data){
+								if (data.estado == "ok") {
+									alert(data.mensaje);
+									//quitar_marcadores(marcadores_nuevos);
+									//$("formulario_edicion")[0].reset();
+									listar();
+								} else {
+										alert(data.mensaje);
+								}
+						},
+						beforeSend:function(){
+
+						},
+						complete:function(){
+								$("#formulario_edicion")[0].reset();
+						}
+				});
+		});
     //cargar puntos al terminar de cargar la pagination
     listar();
 });
 //fuera del document on ready
 
+
+
+
 function listar() {
 		quitar_marcadores(marcadores_db);
+		var formulario_edicion = $("#formulario_edicion");
 
     $.ajax({
         type: "post",
@@ -107,11 +171,32 @@ function listar() {
                     var marca = new google.maps.Marker({
                         idMarcador: item.IdPunto,
                         position: posi,
-                        titulo: item.Titulo
+                        titulo: item.Titulo,
+												cx: item.cx,
+												cy: item.cy,
+												imagen: item.imagen
                     });
                     //agregar evento click al marcador
                     google.maps.event.addListener(marca, "click", function() {
-                        alert("hiciste click en: "+marca.idMarcador + " - " +marca.titulo);
+											//Mostramos la informacion en un alert
+												//alert("hiciste click en: "+marca.idMarcador + " - " +marca.titulo);
+												$("#collapseTwo").collapse("show");
+												$("#collapseOne").collapse("hide");
+
+
+												formulario_edicion.find("input[name='id']").val(marca.idMarcador);
+												formulario_edicion.find("input[name='titulo']").val(marca.titulo).focus();
+												formulario_edicion.find("input[name='cx']").val(marca.cx);
+												formulario_edicion.find("input[name='cy']").val(marca.cy);
+
+												 $('#myModal').modal('show');
+												 $("#promo").attr("src","http://localhost/apigooglemaps/img/"+marca.imagen);
+
+
+
+
+
+
                     });
                     marcadores_db.push(marca);
                     marca.setMap(mapa);
@@ -128,4 +213,4 @@ function listar() {
 
         }
     })
-}
+}//cierre de la funcion listar

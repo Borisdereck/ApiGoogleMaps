@@ -1,10 +1,11 @@
 #mapa{
-	width: 700px auto;;
-	height: 500px;
-	float: left;
-	background: rgb(182, 128, 226);
+	width: 400px;
+	height: 370px ;
+	float: auto;
+	background: rgb(204, 187, 217);
 }
-#infor{
-
-
+#foto{
+	width: 400px;
+	height: 370px ;
+	float: auto;
 }

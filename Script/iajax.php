@@ -1,4 +1,5 @@
 <?php
+sleep(2);
 header('content-type: application/json; charset=utf-8');//HEADER PARA JSON
 include_once 'puntosDao.php';
 $ac = isset($_POST["tipo"])?$_POST["tipo"]:"x"; //PARAMETRO PARA DETERMINAR LA ACCION
@@ -18,7 +19,23 @@ switch ($ac) {
             $r["mensaje"] = "error al grabar!";
         }
     break;
-		
+
+		case "borrar":
+		$d = new puntosDao();
+		$resultados = $d->borrar($_POST["id"]);
+		if($resultados)
+		{
+				$r["estado"] = "ok";
+				$r["mensaje"] = "Grabado Correctamente";
+		}
+		else
+		{
+				$r["estado"] = "error";
+				$r["mensaje"] = "error al grabar!";
+		}
+
+		break;
+
 		case "listar":
 				$p = new puntosDao();
 				$resultados =  $p->listar_todo();
@@ -34,7 +51,7 @@ switch ($ac) {
 
    default:
         $r["estado"] = "error";
-        $r["mensaje"] = "datos no válidos";
+        $r["mensaje"] = "datos no validos";
     break;
 }
 echo json_encode($r);//IMPRIMIR JSON

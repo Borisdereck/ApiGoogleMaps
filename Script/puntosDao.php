@@ -28,6 +28,23 @@ class puntosDao
         }
     }
 
+		public function borrar($id){
+
+			$con = conex::con();
+			$idpunto = mysql_real_escape_string($id);
+			$q = "delete from puntos where IdPunto = ".(int)$idpunto;
+			$rpta = mysql_query($q, $con);
+			mysql_close($con);
+			if($rpta==1)
+			{
+					return TRUE;
+			}
+			else
+			{
+					return FALSE;
+			}
+		}
+
 		public function listar_todo(){
 				$q = "select * from puntos";
 				$con = conex::con();

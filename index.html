@@ -38,29 +38,39 @@
 							<div class="panel-body">
 								<form id="formulario">
 									<table class="table">
-									  <thead>
-									    <tr>
-									      <th>Agregar Sucursal</th>
-									    </tr>
-									  </thead>
-									  <tbody>
-									    <tr>
-									      <td>Nombre Empresa</td>
-												<td><input type="text"  class="form-control" name="titulo" value=""></td>
-									    </tr>
+										<thead>
 											<tr>
-									      <td>Coordenada X</td>
-												<td><input type="text"  class="form-control" readonly  name="cx" value=""></td>
-									    </tr>
+												<th>Agregar Sucursal</th>
+											</tr>
+										</thead>
+										<tbody>
 											<tr>
-									      <td>Coordenada Y</td>
-												<td><input type="text" class="form-control" readonly  name="cy" value=""></td>
-									    </tr>
-									  </tbody>
+												<td>Nombre Empresa</td>
+												<td>
+													<input type="text" class="form-control" name="titulo" value="">
+												</td>
+											</tr>
+											<tr>
+												<td>Coordenada X</td>
+												<td>
+													<input type="text" class="form-control" readonly name="cx" value="">
+												</td>
+											</tr>
+											<tr>
+												<td>Coordenada Y</td>
+												<td>
+													<input type="text" class="form-control" readonly name="cy" value="">
+												</td>
+											</tr>
+											<tr>
+												<td></td>
+												<td><span id="loader_grabar" class=""></span></td>
+											</tr>
+										</tbody>
 									</table>
 
-										<input type="submit" id="btn-grabar" class="btn btn-success btn-sm" value="Guardar">
-										<input type="submit" class="btn btn-danger btn-sm" value="Cancelar">
+									<input type="submit" id="btn-grabar" class="btn btn-success btn-sm" value="Guardar">
+									<input type="submit" class="btn btn-danger btn-sm" value="Cancelar">
 								</form>
 							</div>
 						</div>
@@ -69,27 +79,86 @@
 						<div class="panel-heading" role="tab" id="headingTwo">
 							<h4 class="panel-title">
 		<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-			Buscar
+		Ediccion
 		</a>
 	</h4>
 						</div>
 						<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
 							<div class="panel-body">
-								Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird
-								on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table,
-								raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+								<form id="formulario_edicion">
+									<input type="hidden" name="id">
+									<table class="table">
+										<thead>
+											<tr>
+												<th>Sucursal</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>Nombre Empresa</td>
+												<td>
+													<input type="text" class="form-control" name="titulo" value="">
+												</td>
+											</tr>
+											<tr>
+												<td>Coordenada X</td>
+												<td>
+													<input type="text" class="form-control" readonly name="cx" value="">
+												</td>
+											</tr>
+											<tr>
+												<td>Coordenada Y</td>
+												<td>
+													<input type="text" class="form-control" readonly name="cy" value="">
+												</td>
+											</tr>
+											<tr>
+												<td></td>
+												<td><span id="loader_grabar" class=""></span></td>
+											</tr>
+										</tbody>
+									</table>
+
+									<input type="submit" id="btn-actualizar" class="btn btn-success btn-sm" value="Actualizar">
+									<input type="button" id="botonborrar" class="btn btn-danger btn-sm" value="Borrar">
+								</form>
 							</div>
 						</div>
 					</div>
-
 				</div>
 			</div>
 
 			<!--Mapa-->
-			<div class="col-md-8" id="mapa">
+			<div class="col-md-4">
+				<div class="container col-md-8" id="mapa">
 
+				</div>
 			</div>
+			
 		</div>
+
+
+
+		<div class="modal fade"  id="myModal" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="gridSystemModalLabel">Promocion</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          	<img id="promo" >
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Mostrar ruta</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 	</div>
 
 
