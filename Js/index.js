@@ -190,6 +190,8 @@ function listar() {
 												formulario_edicion.find("input[name='cy']").val(marca.cy);
 
 												 $('#myModal').modal('show');
+
+												 $("#tituloinfo").text(marca.titulo);
 												 $("#promo").attr("src","http://localhost/apigooglemaps/img/"+marca.imagen);
 
 
