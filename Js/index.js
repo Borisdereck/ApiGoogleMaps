@@ -161,7 +161,7 @@ function listar() {
 
     $.ajax({
         type: "post",
-        url: "Script/iajax.php",
+        url: "http://localhost/ApiGoogleMaps/Script/iajax.php",
         dataType: "JSON",
         data: "&tipo=listar",
         success: function(data) {
@@ -193,11 +193,6 @@ function listar() {
 
 												 $("#tituloinfo").text(marca.titulo);
 												 $("#promo").attr("src","http://localhost/apigooglemaps/img/"+marca.imagen);
-
-
-
-
-
 
                     });
                     marcadores_db.push(marca);
